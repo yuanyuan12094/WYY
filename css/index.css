@@ -1,0 +1,348 @@
+/*总体样式*/
+a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
+}
+.lf{
+    float:left;
+}
+.rt{
+    float:right;
+}
+li{
+    list-style: none;
+    cursor: pointer;
+}
+/*header*/
+#nav{
+    width:100%;
+    height:70px;
+    background: url(../images/topbar.png) 0 -80px;
+    line-height: 70px;
+}
+#nav .navbar-brand{
+    display: inline-block;
+    width:163px;
+    height:42px;
+    background: url(../images/topbar.png) no-repeat 0 0;
+    margin-top:11px;
+    margin-right:20px;
+}
+#myCollapse a.dropdown-toggle{
+    text-decoration:none;
+    color:#fff;
+    background: url(../images/topbar.png) 0 -82px;
+    /*font-weight:bold;*/
+    height:50px;
+    line-height:50px;
+    padding:0 40px 0 20px;
+    margin:10px 15px;
+}
+#myCollapse .dropdown-menu{
+    background: rgba(30,30,30,.9);
+    top:90%;
+}
+#myCollapse .dropdown-menu>li>a{
+   color:#fff;
+}
+#myCollapse .dropdown-menu a:hover{
+    background: rgba(0,0,0,.9);
+}
+#nav .form-control{
+    border:none;
+    border-radius:0;
+    padding-left:30px;
+    outline: none;
+    background: url(../images/topbar.png) no-repeat 0 -551px;
+    margin-top:-15px;
+}
+
+/*footer*/
+#footer .copy{
+    float:left;
+    margin-top:50px;
+}
+#footer .copy a{
+    color:#999;
+    font-size: 12px;
+}
+#footer .copy>p:last-child{
+    color:#666;
+    font-size: 12px;
+}
+#footer .copy>p:last-child>a{
+    color:#666;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#footer .footer-logo{
+    float:right;
+    margin-top:50px;
+}
+#footer .footer-logo>li{
+    float:left;
+    list-style: none;
+    padding-left:30px;
+}
+#footer .footer-logo>li>a{
+    display: block;
+    width: 60px;
+    height:70px;
+    background: url(../images/foot_enter.png) no-repeat;
+}
+#footer .footer-logo .logo-musician{
+    background-position:  -67px -80px ;
+}
+#footer .footer-logo .logo-topic{
+    background-position:  0 -80px ;
+}
+#footer .footer-logo .logo-midea{
+    background-position: 0 0 ;
+}
+#footer .footer-logo .logo-reward{
+    background-position:  -67px 0 ;
+}
+#footer .container{
+    margin:0 200px;
+    width:1000px;
+}
+/*红色导航条*/
+#red-nav{
+      height:35px;
+      background:url(../images/topbar.png) 0 -230px;
+      margin-top:70px;
+}
+#red-nav ul{
+    margin:0 auto;
+    height:35px;
+}
+#red-nav li{
+    float:left;
+    list-style: none;
+    height:35px;
+    text-align: center;
+    border-radius: 53%;
+    padding:7px 0;
+    width:16%;
+}
+#red-nav a{
+    padding: 0;
+    color:#fff;
+    text-shadow: 1px 1px #650303;
+}
+#red-nav .list>li:hover{
+  cursor: pointer;
+}
+#red-nav .list>li:hover a{
+    color:#D8D7D7;
+}
+
+/*轮播*/
+.carousel-inner img{
+     width:50%;
+     margin-left:15%;
+ }
+#lunbo{
+    width:100%;
+    padding:0;
+    position: relative;
+    background: #284996;
+}
+#loadApp{
+    width:17.6%;
+    height:100%;
+    position: absolute;
+    top:0;
+    right:17.36%;
+	cursor:pointer;
+    /*background: url(../images/download.png) no-repeat 0 0;*/
+}
+#loadApp:hover{
+    opacity: .9;
+}
+/*主体部分*/
+#mainContent{
+    margin-top:30px;
+}
+#mainContent .nav-tabs{
+    border-bottom:2px solid #C10D0C;
+    height:30px;
+}
+#mainContent .nav-tabs>li{
+    list-style: none;
+    width:20%;
+}
+#mainContent .nav-tabs>li.active a,#mainContent .nav-tabs>li:hover a{
+    border:1px solid transparent;
+    color:#C10D0C;
+}
+#mainContent .nav-tabs>li>a{
+    font-size: 18px;
+    padding-left:20px;
+    text-decoration: none;
+    color:#333;
+}
+#mainContent .nav-tabs>li.active a{
+    background: url(../images/index.png) no-repeat -234px -160px;
+}
+.musicInfo{
+    height:20px;
+    overflow: hidden;
+}
+#music_list .table{
+    width:33%;
+}
+/*主体部分右边*/
+.col-md-offset-1,.col-md-2{
+    padding-right:0;
+}
+.col-md-2>div{
+    width:250px;
+     border:1px solid #ddd;
+ }
+.userLogin{
+    width:250px;
+    background: url(../images/index.png) no-repeat 0 0;
+    height:126px;
+}
+.userLogin>p{
+    width: 205px;
+    margin: 0 auto;
+    padding: 16px 0;
+    line-height: 22px;
+    font-size: 12px;
+    color:#666;
+}
+.userLogin>a{
+    display: block;
+    width: 100px;
+    height: 31px;
+    line-height: 31px;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 1px 0 #8a060b;
+    margin: 0 auto;
+    background: url(../images/index.png) no-repeat 0 -195px;
+}
+.media-left>a{
+    display: block;
+    width:62px;
+    height:62px;
+}
+.media-heading{
+   font-weight: bold;
+    margin:8px 0;
+}
+.all-singer{
+    border-bottom: 1px solid #ddd;
+    font-size: 12px;
+    margin:10px;
+    padding-bottom: 10px;
+}
+.all-singer>a{
+    color:#666;
+    float:right;
+}
+/*新碟上架*/
+#tab2>div{
+    width:700px;
+    margin: 0 auto;
+}
+#newCD{
+    width:700px;
+    height:200px;
+    background: #F5F5F5;
+    border:1px solid #ddd;
+}
+#newCD>li{
+    float:left;
+    margin:32px 8px;
+    width:110px;
+}
+#newCD>li>div{
+   width:117px;
+    background: url(../images/coverall.png) no-repeat 0 -569px;
+}
+.mname,.sname{
+    padding:0;
+    overflow: hidden;
+    max-height:20px;
+    margin:0;
+}
+
+/*热门推荐播放图标*/
+.thumbnail{
+     position:relative;
+    cursor: pointer;
+    padding:0;
+}
+.thumbnail>.play {
+    position: absolute;
+    width: 100%;
+    height: 27px;
+    bottom:31px;
+    right: 0;
+    background: rgba(0, 0, 0, .5);
+    color:#ccc;
+    padding-top:4px;
+}
+.thumbnail:hover .play{
+    display: block;
+}
+.thumbnail .icon-earphone{
+    float:left;
+    width: 14px;
+    height: 11px;
+    background: url(../images/iconall.png) no-repeat 0 -24px;
+    margin: 5px 5px 9px 6px;
+}
+.thumbnail .icon-play{
+    float:right;
+    width: 16px;
+    height: 17px;
+    background: url(../images/iconall.png) no-repeat 0 0;
+    margin: 2px 6px;
+}
+.thumbnail .icon-play:hover{
+    background-position:  0 -60px;
+}
+audio{
+    width:90%;
+}
+/*登录和注册模态框*/
+.musicName{
+    position: absolute;
+    top:-25px;
+    right:50%;
+    color:#333;
+    font-weight: bold;
+    font-size: 16px;
+}
+#Lmodal,#Rmodal{
+    width:100%;
+    height:100%;
+    background: rgba(0, 0,0, 0.6);
+    position: fixed;
+    z-index: 1000;
+}
+#login,#register{
+    width:50%;
+    height:350px;
+    position: absolute;
+    background: #eee;
+    top:30%;
+    right:21%;
+    border-radius: 10px;
+}
+#login>.loginHeader,#register>.registerHeader{
+    background: #2D2D2D;
+    color:#fff;
+    font-weight: bold;
+    padding:10px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+.form-horizontal{
+    width:80%;
+}

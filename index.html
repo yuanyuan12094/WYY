@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/index.css"/>
+    <style>
+        /*1、屏幕尺寸 大于 991 时 (>= 992)*/
+        @media screen and (min-width:992px){
+            #red-nav .list{
+                width:70%;
+            }
+            #red-nav .list>li{
+                width:15%;
+            }
+        }
+        /*2、屏幕尺寸在 768 ~ 991之间*/
+        @media screen and (min-width:768px) and (max-width:991px){
+            #red-nav .list{
+                width:80%;
+            }
+            .xs-none{
+                display: none;
+            }
+        }
+        /*3、屏幕尺寸 <= 767px*/
+        @media screen and (max-width:767px){
+            .xs-none{
+                display: none;
+            }
+            #red-nav .list{
+                width:100%;
+            }
+            #red-nav .list>li>a{
+                font-size: 12px;
+            }
+            #mainContent .nav-tabs{
+                padding:0;
+            }
+            #mainContent .nav-tabs>li{
+                width:25%;
+            }
+            #mainContent .nav-tabs>li>a{
+                font-size: 12px;
+                padding-bottom:5px;
+            }
+        }
+    </style>
+
+</head>
+<body  ng-controller="pagerCtrl">
+<!--登录模态框-->
+<div id="Lmodal" ng-show="loginShow">
+    <div id="login">
+        <div class="loginHeader">网易邮箱账号登录
+            <i class="glyphicon glyphicon-remove rt" ng-click="closel()"></i>
+        </div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputEmail3" ng-model="uname" placeholder="请输入账号">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" ng-model="upwd" id="inputPassword3" placeholder="请输入密码">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox">自动登录
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button class="btn btn-primary btn-block" ng-click="submitLogin()">登录</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!--注册模态框-->
+<div id="Rmodal" ng-show="registerShow">
+    <div id="register">
+        <div class="registerHeader">网易邮箱账号注册
+            <i class="glyphicon glyphicon-remove rt" ng-click="closeR()"></i>
+        </div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label">用户名</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputName" ng-model="regName" placeholder="请输入用户名" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword" class="col-sm-2 control-label">密码</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="inputPassword" ng-model="regPwd" placeholder="请输入密码" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail" class="col-sm-2 control-label">邮箱</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="inputEmail" ng-model="regEmail" placeholder="请输入邮箱">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success btn-block" ng-click="submitRegister()">立即注册</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!--顶部导航条-->
+<nav id="nav" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <!--1.navbar-header-->
+        <div class="navbar-header">
+            <!--1.1navbar-brand-->
+            <a class="navbar-brand"></a>
+            <a>{{'欢迎 '+user_name}}</a>
+            <!--1.2navbar-toggle-->
+            <button type="button" class="btn navbar-toggle"
+                    data-toggle="collapse" data-target="#myCollapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <!--2.折叠内容-->
+        <div id="myCollapse" class="collapse navbar-collapse">
+            <!--2.1下拉菜单-->
+            <div class="dropdown navbar-left">
+                <a href="#" class="dropdown-toggle navbar-text"
+                   data-toggle="dropdown">
+                    菜单
+                    <span class="caret"></span>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li><a href="#">发现音乐</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">我的音乐</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">朋友</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">商城</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">音乐人</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">下载客户端</a></li>
+										
+                </ul>
+            </div>
+
+
+            <!--2.2 导航-->
+            <ul class="nav navbar-nav navbar-right">
+
+                <li>
+                    <a ng-click="login()">登录</a>
+
+                </li>
+
+                <li>
+                    <a href="#" ng-click="register()">注册</a>
+                </li>
+
+            </ul>
+            <!--2.3 form表单-->
+            <form class="navbar-form navbar-right">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="单曲/歌手/专辑"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+<!--红色导航条-->
+<div id="red-nav">
+    <ul class="nav list">
+        <li>
+            <a href="#">推荐</a>
+        </li>
+        <li>
+            <a href="#">排行榜</a>
+        </li>
+        <li>
+            <a href="#">歌单</a>
+        </li>
+        <li>
+            <a href="#">主播电台</a>
+        </li>
+        <li>
+            <a href="#">歌手</a>
+        </li>
+        <li>
+            <a href="#">新碟上架</a>
+        </li>
+    </ul>
+</div>
+<!--轮播-->
+<div class="container" id="lunbo">
+
+    <div id="carouselCtrl" class="carousel slide" data-ride="carousel" data-interval="3000">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselCtrl" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselCtrl" data-slide-to="1"></li>
+            <li data-target="#carouselCtrl" data-slide-to="2"></li>
+            <li data-target="#carouselCtrl" data-slide-to="3"></li>
+            <li data-target="#carouselCtrl" data-slide-to="4"></li>
+            <li data-target="#carouselCtrl" data-slide-to="5"></li>
+            <li data-target="#carouselCtrl" data-slide-to="6"></li>
+            <li data-target="#carouselCtrl" data-slide-to="7"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="images/lun1.jpg"/>
+            </div>
+            <div class="item">
+                <img src="images/lun2.jpg"/>
+            </div>
+            <div class="item">
+                <img src="images/lun3.jpg"/>
+            </div>
+            <div class="item">
+                <img src="images/lun4.jpg"/>
+            </div>
+            <div class="item">
+                <img src="images/lun5.jpg"/>
+            </div>
+            <div class="item">
+                <img src="images/lun6.jpg"/>
+            </div>
+            <div class="item">
+                <img src="images/lun7.jpg"/>
+            </div>
+            <div class="item">
+                <img src="images/lun8.jpg"/>
+            </div>
+        </div>
+    </div>
+    <div id="loadApp">
+        <img src="images/download.png" class="img-responsive" ng-click="download()"/>
+    </div>
+		
+</div>
+<!--主体内容-->
+<div id="mainContent">
+    <!--左边-->
+    <div class="col-md-offset-1 col-md-7 col-xs-12">
+        <ul class="nav-tabs">
+            <li class="active">
+                <a href="#tab1" data-toggle="tab">热门推荐</a>
+            </li>
+            <li>
+                <a href="#tab2" data-toggle="tab">新碟上架</a>
+            </li>
+            <li>
+                <a href="#tab3" data-toggle="tab">榜单</a>
+            </li>
+            <li>
+                <a href="#"  style="font-size: 12px;float:right;margin-top:5px">更多&gt;&gt;</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="tab1">
+                <div>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-3" ng-repeat="tmp in list">
+                            <div class="thumbnail" ng-click="handleClick($index)">
+                                <img ng-src="{{tmp.pic}}" class="img-responsive">
+
+                                <div>
+                                    <p class="musicInfo">{{tmp.hname}}</p>
+                                </div>
+                                <div class="play">
+                                   <span class="icon-earphone"></span>
+                                    <span>{{tmp.lcount}}</span>
+                                    <a class="icon-play"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="pager">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li ng-repeat="tmp in arr" ng-click="pager(tmp)"><a>{{tmp}}</a></li>
+
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-pane" id="tab2">
+                <div>
+                    <canvas id="canvasMusic" width="700" height="20">
+                        您的浏览器不支持canvas标签
+                    </canvas>
+
+                </div>
+                <ul id="newCD">
+                    <li>
+                        <div>
+                            <a href="">
+                                <img src="images/xindie01.jpg"/>
+                            </a>
+                        </div>
+                        <p class="mname">欢乐颂2电视原声带</p>
+                        <p class="sname">群星</p>
+                    </li>
+                    <li>
+                        <div>
+                            <a href="">
+                                <img src="images/xindie02.jpg"/>
+                            </a>
+                        </div>
+                        <p class="mname">2U</p>
+                        <p class="sname">David</p>
+                    </li>
+                    <li>
+                        <div>
+                            <a href="">
+                                <img src="images/xindie03.jpg"/>
+                            </a>
+                        </div>
+                        <p class="mname">군주 - 가면의 주인 OST
+                            </p>
+                        <p class="sname">君主-假面的主人 OST合辑</p>
+                    </li>
+                    <li>
+                        <div>
+                            <a href="">
+                                <img src="images/xindie04.jpg"/>
+                            </a>
+                        </div>
+                        <p class="mname">jhfjg</p>
+                        <p class="sname">ghh</p>
+                    </li>
+                    <li>
+                        <div>
+                            <a href="">
+                                <img src="images/xindie05.jpg"/>
+                            </a>
+                        </div>
+                        <p class="mname">夏至未至</p>
+                        <p class="sname">群星</p>
+                    </li>
+                </ul>
+                <h3>
+                    <a>
+                        <img src="images/ad.bid.jpg"/>
+                    </a>
+                </h3>
+                
+            </div>
+            <div class="tab-pane" id="tab3">
+                <div id="music_list">
+                    <table class="table table-striped lf" width="30%">
+                        <thead>
+                            <tr>
+                                <td>
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <img src="images/bangdan01.png" class="media-object"/>
+                                        </div>
+                                        <div class="media-body">
+                                            <h5 class="media-heading">云音乐飙升榜</h5>
+                                            <span></span>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <span>1</span>
+                                <a>rytrytrutru</a>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>1</span>
+                                <a>rytrytrutru</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>1</span>
+                                <a>rytrytrutru</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>1</span>
+                                <a>rytrytrutru</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-striped lf" width="30%">
+                        <thead>
+                        <tr>
+                            <td>
+                                <div class="media">
+                                    <div class="media-left">
+                                        <img src="images/bangdan01.png" class="media-object"/>
+                                    </div>
+                                    <div class="media-body">
+                                        <h5 class="media-heading">云音乐飙升榜</h5>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <span>1</span>
+                                <a>rytrytrutru</a>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>1</span>
+                                <a>rytrytrutru</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>1</span>
+                                <a>rytrytrutru</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>1</span>
+                                <a>rytrytrutru</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-striped lf" width="30%">
+                        <thead>
+                        <tr>
+                            <td>
+                                <div class="media">
+                                    <div class="media-left">
+                                        <img src="images/bangdan01.png" class="media-object"/>
+                                    </div>
+                                    <div class="media-body">
+                                        <h5 class="media-heading">云音乐飙升榜</h5>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <span>1</span>
+                                <a>rytrytrutru</a>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>1</span>
+                                <a>rytrytrutru</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>1</span>
+                                <a>rytrytrutru</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>1</span>
+                                <a>rytrytrutru</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--右边-->
+    <div class="col-xs-12 col-md-2 xs-none">
+        <div>
+            <div class="userLogin">
+                <p>登录网易云音乐，可以享受无限收藏的乐趣，并且无限同步到手机</p>
+                <a href="">用户登录</a>
+            </div>
+            <div>
+                <h5 class="all-singer">
+                    <b>入驻歌手</b>
+                    <a href="#">查看全部&lt;&lt;</a>
+                </h5>
+                <ul class="media-list">
+                    <li class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object" src="images/singer01.jpg">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">张惠妹aMEI</h4>
+                            <h6>台湾歌手张惠妹</h6>
+                        </div>
+                    </li>
+                    <li class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object" src="images/singer02.jpg">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">尚雯婕</h4>
+                            <h6>原创电子唱作人</h6>
+                        </div>
+                    </li>
+                    <li class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object" src="images/singer03.jpg">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">羽泉组合</h4>
+                            <h6>国内知名演唱组合</h6>
+                        </div>
+                    </li>
+                    <li class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object" src="images/singer04.jpg">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">李志</h4>
+                            <h6>个体音乐人李志</h6>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--播放器-->
+<div class="navbar-fixed-bottom">
+    <audio ng-src="{{mp3}}" controls ng-show="ifShow"></audio>
+    <p class="musicName">{{name}}</p>
+</div>
+<!--页面底部-->
+<div id="footer">
+    <div class="row">
+        <div class="copy col-md-offset-1 col-md-5 col-xs-12">
+            <p>
+                <a href="#">关于网易</a>
+                <span>|</span>
+                <a href="#">关于网易</a>
+                <span>|</span>
+                <a href="#">关于网易</a>
+                <span>|</span>
+                <a href="#">关于网易</a>
+                <span>|</span>
+                <a href="#">关于网易</a>
+                <span>|</span>
+            </p>
+            <p>
+                <span>网易公司版权所有©1997-2017 </span>
+                杭州乐读科技有限公司运营：
+                <a href="#">浙网文[2015]0415-135号</a>
+            </p>
+        </div>
+        <ul class="footer-logo col-md-6 col-xs-12">
+            <li>
+                <a href="#" class="logo-musician"></a>
+            </li>
+            <li>
+                <a href="#" class="logo-topic"></a>
+            </li>
+            <li>
+                <a href="#" class="logo-midea"></a>
+            </li>
+            <li>
+                <a href="#" class="logo-reward"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+<script src="js/jquery-1.11.3.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/angular.js"></script>
+<script src="js/index.js"></script>
+<script type="text/javascript">
+
+	</script>
+</body>
+</html>
